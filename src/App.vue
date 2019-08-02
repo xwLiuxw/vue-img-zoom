@@ -39,7 +39,7 @@ export default {
 }
 .zoom-box {
     border: 1px solid #ccc;
-    height: 400px;
-    width: 400px;
+    height: 398px;
+    width: 398px;
 }
 </style>

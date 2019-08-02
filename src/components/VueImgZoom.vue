@@ -9,7 +9,7 @@
             <img :src="url" alt="" ref="originalImg" />
         </div>
         <div class="cover" ref="coverBox" v-show="zooming"></div>
-        <div class="zoom-box" v-show="zooming">
+        <div class="zoom-box">
             <div class="zoom" ref="zoom">
                 <div class="zoom-pic" ref="zoomPic">
                     <img :src="url" alt="" ref="zoomImg" />
@@ -55,21 +55,7 @@ export default {
     },
     watch: {
         'url': function () { // 获取图片比例
-            let img = new Image()
-            img.src = this.url
-            img.onload = () => {
-                if (img.width / img.height > 1) {
-                    this.originalImg.style.width = '100%'
-                    this.originalImg.style.height = 'auto'
-                    this.zoomImg.style.width = '100%'
-                    this.zoomImg.style.height = 'auto%'
-                } else {
-                    this.originalImg.style.height = '100%'
-                    this.originalImg.style.width = 'auto'
-                    this.zoomImg.style.height = '100%'
-                    this.zoomImg.style.width = 'auto'
-                }
-            }
+            this.initImg()
         }
     },
     mounted () {
@@ -79,8 +65,32 @@ export default {
         this.coverBox.style.height = `${100 / this.scale}%`
         this.leftRange = [this.width / this.scale / 2, this.width - this.width / this.scale / 2]
         this.TopRange = [this.height / this.scale / 2, this.height - this.height / this.scale / 2]
+        this.initImg()
+
     },
     methods: {
+        initImg () {
+            let img = new Image()
+            img.src = this.url
+            img.onload = () => {
+                if (img.width / img.height > 1) {
+                    this.originalImg.style.width = '100%'
+                    this.originalImg.style.height = 'auto'
+                    this.zoomImg.style.width = '100%'
+                    this.zoomImg.style.height = 'auto%'
+                } else if (img.width / img.height < 1) {
+                    this.originalImg.style.height = '100%'
+                    this.originalImg.style.width = 'auto'
+                    this.zoomImg.style.height = '100%'
+                    this.zoomImg.style.width = 'auto'
+                } else {
+                    this.originalImg.style.height = '100%'
+                    this.originalImg.style.width = '100%'
+                    this.zoomImg.style.height = '100%'
+                    this.zoomImg.style.width = '100%'
+                }
+            }
+        },
         mousemove (event) {
             if (!this.zooming) {
                 this.zooming = true
