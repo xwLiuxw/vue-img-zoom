@@ -9,7 +9,7 @@
             <img :src="url" alt="" ref="originalImg" />
         </div>
         <div class="cover" ref="coverBox" v-show="zooming"></div>
-        <div class="zoom-box">
+        <div class="zoom-box" v-show="zooming">
             <div class="zoom" ref="zoom">
                 <div class="zoom-pic" ref="zoomPic">
                     <img :src="url" alt="" ref="zoomImg" />

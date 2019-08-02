@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import VueImgZoom from './components/VueImgZoom.vue'
+import VueImgZoom from './components/index.js'
 import imgUrl from './assets/logo.png'
 
 export default {
